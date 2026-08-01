@@ -10,7 +10,7 @@ export default function Grid({ rows, cols, picks, emptyCells, rowAxis, colAxis, 
   }
 
   return (
-    <div style={{ overflowX: 'auto', padding: '1rem', backdropFilter: 'blur(6px)' }}>
+    <div style={{ overflowX: 'auto', padding: '1rem', width: 'fit-content', maxWidth: '100%', margin: '0 auto' }}>
       <table style={{ borderCollapse: 'collapse', tableLayout: 'fixed', width: 'max-content' }}>
         <thead>
           <tr>
