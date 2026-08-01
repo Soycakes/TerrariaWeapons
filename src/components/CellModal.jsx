@@ -18,7 +18,7 @@ export default function CellModal({ weapons, rowAxis, colAxis, row, col, onPick,
   return (
     <div onClick={onClose} style={overlay}>
       <div onClick={e => e.stopPropagation()} style={box}>
-        <p style={{ marginBottom: '0.5rem' }}>{row} / {col}</p>
+        <p style={{ marginBottom: '0.5rem' }}>{rowAxis?.rename?.[row] || row} / {colAxis?.rename?.[col] || col}</p>
         <input
           autoFocus
           placeholder="Search..."
