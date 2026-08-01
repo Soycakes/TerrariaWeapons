@@ -32,14 +32,14 @@ export default function Grid({ rows, cols, picks, rowAxis, colAxis, favorites, o
                   return (
                     <td key={col} style={cell} onClick={() => onCellClick(row, col)}>
                       <div style={cellInner}>
-                        {pick && <Sprite rawName={pick.rawName} name={pick.data.name} size={64} />}
+                        {pick && <Sprite id={pick.data.id} rawName={pick.rawName} name={pick.data.name} size={64} />}
                       </div>
                     </td>
                   )
                 })}
                 <td style={favoriteCell} onClick={() => onFavoriteClick(row)}>
                   <div style={cellInner}>
-                    {favorite && <Sprite rawName={favorite.rawName} name={favorite.data.name} size={64} />}
+                    {favorite && <Sprite id={favorite.data.id} rawName={favorite.rawName} name={favorite.data.name} size={64} />}
                   </div>
                 </td>
               </tr>

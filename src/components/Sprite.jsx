@@ -1,15 +1,10 @@
 const base = import.meta.env.BASE_URL
 
-function toFilename(rawName) {
-  return decodeURIComponent(rawName).replace(/[^a-zA-Z0-9]/g, '')
-}
-
-export default function Sprite({ rawName, name, size = 32 }) {
-  const file = toFilename(rawName)
+export default function Sprite({ id, rawName, name, size = 32 }) {
   return (
     <img
-      key={rawName}
-      src={`${base}sprites/${file}.png`}
+      key={id}
+      src={`${base}sprites/Item_${id}.png`}
       alt={name}
       title={name}
       style={{ imageRendering: 'pixelated', width: size, height: size, objectFit: 'contain' }}

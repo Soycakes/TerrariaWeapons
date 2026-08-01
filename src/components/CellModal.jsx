@@ -30,7 +30,7 @@ export default function CellModal({ weapons, rowAxis, colAxis, row, col, onPick,
           <button onClick={() => onPick(null)} style={clearBtn}>Clear</button>
           {valid.map(w => (
             <button key={w.rawName} onClick={() => onPick(w)} style={itemBtn}>
-              <Sprite rawName={w.rawName} name={w.data.name} />
+              <Sprite id={w.data.id} rawName={w.rawName} name={w.data.name} />
               <span>{w.data.name}</span>
             </button>
           ))}

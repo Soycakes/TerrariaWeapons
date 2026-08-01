@@ -10,7 +10,7 @@ export default function FavoritePicker({ rowPicks, onPick, onClose }) {
           {rowPicks.length === 0 && <p>No picks in this row yet.</p>}
           {rowPicks.map(w => (
             <button key={w.rawName} onClick={() => onPick(w)} style={itemBtn}>
-              <Sprite rawName={w.rawName} name={w.data.name} />
+              <Sprite id={w.data.id} rawName={w.rawName} name={w.data.name} />
               <span>{w.data.name}</span>
             </button>
           ))}
