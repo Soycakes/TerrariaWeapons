@@ -284,7 +284,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Plantera"
   },
   "Coin_Gun": {
-    subclass: "Guns",
+    subclass: "Specialist",
     "progression tier": "Pre-mechanical bosses"
   },
   "Combat_Wrench": {
@@ -1180,6 +1180,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Golem"
   },
   "Solar_Eruption": {
+    subclass: "Flails",
     "progression tier": "Pre-Moon Lord"
   },
   "Space_Gun": {

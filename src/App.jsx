@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { weaponData } from './data/weapons'
 import { weaponsNew } from './data/weaponsNew'
 import { weaponExtras } from './data/weaponsExtra'
@@ -83,6 +83,23 @@ export default function App() {
 
   const rows = rowAxis ? getUniqueValues(rowAxis) : null
   const cols = colAxis ? getUniqueValues(colAxis) : null
+
+  const emptyCells = useMemo(() => {
+    if (!rows || !cols) return new Set()
+    const set = new Set()
+    for (const row of rows) {
+      for (const col of cols) {
+        const has = weapons.some(w => {
+          const rv = w.data[rowAxis.field]
+          const cv = w.data[colAxis.field]
+          return (Array.isArray(rv) ? rv.includes(row) : rv === row) &&
+                 (Array.isArray(cv) ? cv.includes(col) : cv === col)
+        })
+        if (!has) set.add(`${row}|${col}`)
+      }
+    }
+    return set
+  }, [rowAxis, colAxis])
 
   useEffect(() => {
     const savedPicks = {}
@@ -200,6 +217,7 @@ export default function App() {
         rowAxis={rowAxis}
         colAxis={colAxis}
         favorites={favorites}
+        emptyCells={emptyCells}
         colFavorites={colFavorites}
         totalFavorite={totalFavorite}
         onCellClick={(row, col) => setOpenCell({ row, col })}

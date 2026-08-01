@@ -1,5 +1,9 @@
 export const axisOptions = [
-  { label: 'Weapon Class', field: 'damageType' },
+  { label: 'Weapon Class', field: 'damageType', rename: {
+    'Ranged': 'Ranger',
+    'Magic': 'Mage',
+    'Summon': 'Summoner',
+  }, order: ['Melee', 'Ranged', 'Magic', 'Summon'] },
   { label: 'Obtained By', field: 'obtained' },
   { label: 'Rarity', field: 'rarity' },
   { label: 'Knockback', field: 'knockback' },
