@@ -207,7 +207,7 @@ export default function App() {
 
   return (
     <div style={{ backgroundImage: 'url(/TerrariaWeapons/ui/background.png)', backgroundSize: 'cover', backgroundAttachment: 'fixed', minHeight: '100vh', padding: '1rem', color: '#fff' }}>
-      <h1 style={{ marginBottom: '1rem', color: '#f5c842', fontSize: '3rem' }}>Terraria Weapons Grid</h1>
+      <h1 style={{ marginBottom: '1rem', color: '#f5c842', fontSize: '3rem' }}>Favorite Terraria Weapons</h1>
 
       <div style={{ display: 'inline-flex', gap: '1.5rem', alignItems: 'center', marginBottom: '1rem', background: 'rgba(30,45,64,0.75)', backdropFilter: 'blur(6px)', border: '2px solid #5080b8', borderRadius: 6, padding: '0.6rem 1rem' }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

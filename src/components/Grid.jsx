@@ -70,7 +70,7 @@ export default function Grid({ rows, cols, picks, emptyCells, rowAxis, colAxis, 
 }
 
 const corner = { width: 120, height: 60 }
-const header = { padding: '8px 12px', background: 'rgba(58,90,140,0.95)', color: '#fff', fontWeight: 'bold', border: '1px solid #5080b8', textAlign: 'center' }
+const header = { width: 120, padding: '8px 12px', background: 'rgba(58,90,140,0.95)', color: '#fff', fontWeight: 'bold', border: '1px solid #5080b8', textAlign: 'center' }
 const cell = { width: 120, height: 80, border: '1px solid #3a5a8c', background: 'rgba(36,58,94,0.9)', cursor: 'pointer', verticalAlign: 'middle' }
 const emptyCell = { width: 120, height: 80, border: '1px solid #1e2d40', background: 'rgba(17,24,39,0.9)', cursor: 'pointer', verticalAlign: 'middle' }
 const favoriteCell = { width: 120, height: 80, border: '2px solid #5080b8', background: 'rgba(45,79,122,0.85)', cursor: 'pointer', verticalAlign: 'middle' }
