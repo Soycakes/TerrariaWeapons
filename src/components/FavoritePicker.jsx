@@ -1,14 +1,14 @@
 import Sprite from './Sprite'
 
-export default function FavoritePicker({ rowPicks, onPick, onClose }) {
+export default function FavoritePicker({ title = 'Pick favorite', options, onPick, onClose }) {
   return (
     <div onClick={onClose} style={overlay}>
       <div onClick={e => e.stopPropagation()} style={box}>
-        <p style={{ marginBottom: '0.5rem' }}>Pick row favorite</p>
+        <p style={{ marginBottom: '0.5rem' }}>{title}</p>
         <div style={list}>
           <button onClick={() => onPick(null)} style={clearBtn}>Clear</button>
-          {rowPicks.length === 0 && <p>No picks in this row yet.</p>}
-          {rowPicks.map(w => (
+          {options.length === 0 && <p>No picks in this row yet.</p>}
+          {options.map(w => (
             <button key={w.rawName} onClick={() => onPick(w)} style={itemBtn}>
               <Sprite id={w.data.id} rawName={w.rawName} name={w.data.name} />
               <span>{w.data.name}</span>

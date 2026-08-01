@@ -4,7 +4,7 @@ function display(axis, value) {
   return axis?.rename?.[value] || value
 }
 
-export default function Grid({ rows, cols, picks, rowAxis, colAxis, favorites, onCellClick, onFavoriteClick }) {
+export default function Grid({ rows, cols, picks, rowAxis, colAxis, favorites, colFavorites, totalFavorite, onCellClick, onFavoriteClick, onColFavoriteClick, onTotalFavoriteClick }) {
   if (!rows || !cols) {
     return <p style={{ padding: '1rem' }}>Pick a row and column category to get started.</p>
   }
@@ -45,6 +45,24 @@ export default function Grid({ rows, cols, picks, rowAxis, colAxis, favorites, o
               </tr>
             )
           })}
+          <tr>
+            <td style={header}>Favorite</td>
+            {cols.map(col => {
+              const fav = colFavorites[col]
+              return (
+                <td key={col} style={favoriteCell} onClick={() => onColFavoriteClick(col)}>
+                  <div style={cellInner}>
+                    {fav && <Sprite id={fav.data.id} rawName={fav.rawName} name={fav.data.name} size={64} />}
+                  </div>
+                </td>
+              )
+            })}
+            <td style={totalCell} onClick={onTotalFavoriteClick}>
+              <div style={cellInner}>
+                {totalFavorite && <Sprite id={totalFavorite.data.id} rawName={totalFavorite.rawName} name={totalFavorite.data.name} size={64} />}
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -55,4 +73,5 @@ const corner = { width: 120, height: 60 }
 const header = { padding: '8px 12px', background: '#aaa', fontWeight: 'bold', border: '1px solid #888', textAlign: 'center' }
 const cell = { width: 120, height: 80, border: '1px solid #888', background: '#ddd', cursor: 'pointer', verticalAlign: 'middle' }
 const favoriteCell = { width: 120, height: 80, border: '2px solid #888', background: '#c8c8c8', cursor: 'pointer', verticalAlign: 'middle' }
+const totalCell = { width: 120, height: 80, border: '2px solid #666', background: '#b0b0b0', cursor: 'pointer', verticalAlign: 'middle' }
 const cellInner = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }

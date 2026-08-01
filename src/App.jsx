@@ -41,11 +41,21 @@ const init = (() => {
       const weapon = weapons.find(w => w.rawName === rawName)
       if (weapon) favorites[row] = weapon
     }
+    const colFavorites = {}
+    for (const [col, rawName] of Object.entries(s.colFavorites || {})) {
+      const weapon = weapons.find(w => w.rawName === rawName)
+      if (weapon) colFavorites[col] = weapon
+    }
+    const totalFavorite = s.totalFavorite
+      ? weapons.find(w => w.rawName === s.totalFavorite) || null
+      : null
     return {
       rowAxis: axisOptions.find(o => o.field === s.rowAxis) || axisOptions.find(o => o.field === 'subclass'),
       colAxis: axisOptions.find(o => o.field === s.colAxis) || axisOptions.find(o => o.field === 'progression tier'),
       picks,
       favorites,
+      colFavorites,
+      totalFavorite,
     }
   } catch {
     return {
@@ -53,6 +63,8 @@ const init = (() => {
       colAxis: axisOptions.find(o => o.field === 'progression tier'),
       picks: {},
       favorites: {},
+      colFavorites: {},
+      totalFavorite: null,
     }
   }
 })()
@@ -62,8 +74,12 @@ export default function App() {
   const [colAxis, setColAxis] = useState(init.colAxis)
   const [picks, setPicks] = useState(init.picks)
   const [favorites, setFavorites] = useState(init.favorites)
+  const [colFavorites, setColFavorites] = useState(init.colFavorites)
+  const [totalFavorite, setTotalFavorite] = useState(init.totalFavorite)
   const [openCell, setOpenCell] = useState(null)
   const [openFavoriteRow, setOpenFavoriteRow] = useState(null)
+  const [openFavoriteCol, setOpenFavoriteCol] = useState(null)
+  const [openTotalFavorite, setOpenTotalFavorite] = useState(false)
 
   const rows = rowAxis ? getUniqueValues(rowAxis) : null
   const cols = colAxis ? getUniqueValues(colAxis) : null
@@ -73,18 +89,24 @@ export default function App() {
     for (const [key, weapon] of Object.entries(picks)) savedPicks[key] = weapon.rawName
     const savedFavorites = {}
     for (const [row, weapon] of Object.entries(favorites)) savedFavorites[row] = weapon.rawName
+    const savedColFavorites = {}
+    for (const [col, weapon] of Object.entries(colFavorites)) savedColFavorites[col] = weapon.rawName
     localStorage.setItem(SAVE_KEY, JSON.stringify({
       rowAxis: rowAxis?.field || null,
       colAxis: colAxis?.field || null,
       picks: savedPicks,
       favorites: savedFavorites,
+      colFavorites: savedColFavorites,
+      totalFavorite: totalFavorite?.rawName || null,
     }))
-  }, [rowAxis, colAxis, picks, favorites])
+  }, [rowAxis, colAxis, picks, favorites, colFavorites, totalFavorite])
 
   function pickAxis(field, setter) {
     setter(axisOptions.find(o => o.field === field) || null)
     setPicks({})
     setFavorites({})
+    setColFavorites({})
+    setTotalFavorite(null)
   }
 
   function onPick(weapon) {
@@ -96,8 +118,13 @@ export default function App() {
       else delete next[key]
       return next
     })
-    if (current?.rawName === favorites[openCell.row]?.rawName && weapon?.rawName !== current?.rawName) {
-      setFavorites(prev => { const next = { ...prev }; delete next[openCell.row]; return next })
+    if (current && weapon?.rawName !== current.rawName) {
+      if (current.rawName === favorites[openCell.row]?.rawName)
+        setFavorites(prev => { const next = { ...prev }; delete next[openCell.row]; return next })
+      if (current.rawName === colFavorites[openCell.col]?.rawName)
+        setColFavorites(prev => { const next = { ...prev }; delete next[openCell.col]; return next })
+      if (current.rawName === totalFavorite?.rawName)
+        setTotalFavorite(null)
     }
     setOpenCell(null)
   }
@@ -112,14 +139,35 @@ export default function App() {
     setOpenFavoriteRow(null)
   }
 
+  function onColFavoritePick(weapon) {
+    setColFavorites(prev => {
+      const next = { ...prev }
+      if (weapon) next[openFavoriteCol] = weapon
+      else delete next[openFavoriteCol]
+      return next
+    })
+    setOpenFavoriteCol(null)
+  }
+
+  function onTotalFavoritePick(weapon) {
+    setTotalFavorite(weapon || null)
+    setOpenTotalFavorite(false)
+  }
+
   function reset() {
     if (!confirm('Reset all picks?')) return
     setRowAxis(null)
     setColAxis(null)
     setPicks({})
     setFavorites({})
+    setColFavorites({})
+    setTotalFavorite(null)
     localStorage.removeItem(SAVE_KEY)
   }
+
+  const totalPool = [...new Map(
+    [...Object.values(favorites), ...Object.values(colFavorites)].map(w => [w.rawName, w])
+  ).values()]
 
   return (
     <div style={{ background: '#ccc', minHeight: '100vh', padding: '1rem' }}>
@@ -152,8 +200,12 @@ export default function App() {
         rowAxis={rowAxis}
         colAxis={colAxis}
         favorites={favorites}
+        colFavorites={colFavorites}
+        totalFavorite={totalFavorite}
         onCellClick={(row, col) => setOpenCell({ row, col })}
         onFavoriteClick={row => setOpenFavoriteRow(row)}
+        onColFavoriteClick={col => setOpenFavoriteCol(col)}
+        onTotalFavoriteClick={() => setOpenTotalFavorite(true)}
       />
 
       {openCell && (
@@ -170,9 +222,28 @@ export default function App() {
 
       {openFavoriteRow && (
         <FavoritePicker
-          rowPicks={cols ? cols.map(col => picks[`${openFavoriteRow}|${col}`]).filter(Boolean) : []}
+          title="Pick row favorite"
+          options={cols ? cols.map(col => picks[`${openFavoriteRow}|${col}`]).filter(Boolean) : []}
           onPick={onFavoritePick}
           onClose={() => setOpenFavoriteRow(null)}
+        />
+      )}
+
+      {openFavoriteCol && (
+        <FavoritePicker
+          title="Pick column favorite"
+          options={rows ? rows.map(row => picks[`${row}|${openFavoriteCol}`]).filter(Boolean) : []}
+          onPick={onColFavoritePick}
+          onClose={() => setOpenFavoriteCol(null)}
+        />
+      )}
+
+      {openTotalFavorite && (
+        <FavoritePicker
+          title="Pick total favorite"
+          options={totalPool}
+          onPick={onTotalFavoritePick}
+          onClose={() => setOpenTotalFavorite(false)}
         />
       )}
     </div>
