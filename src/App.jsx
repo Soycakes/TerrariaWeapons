@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { weaponData } from './data/weapons'
+import { weaponsNew } from './data/weaponsNew'
 import { weaponExtras } from './data/weaponsExtra'
 import { axisOptions } from './config/categories'
 import Grid from './components/Grid'
 import CellModal from './components/CellModal'
 import FavoritePicker from './components/FavoritePicker'
 
-const weapons = weaponData.map(w => ({
+const weapons = [...weaponData, ...weaponsNew].map(w => ({
   ...w,
   data: { ...w.data, ...(weaponExtras[w.rawName] || {}) }
 }))
@@ -19,7 +20,11 @@ function getUniqueValues(axis) {
     return Array.isArray(val) ? val : [val]
   })
   const unique = [...new Set(all)].filter(Boolean)
-  if (axis.order) return unique.sort((a, b) => axis.order.indexOf(a) - axis.order.indexOf(b))
+  if (axis.order) return unique.sort((a, b) => {
+    const ai = axis.order.indexOf(a)
+    const bi = axis.order.indexOf(b)
+    return (ai === -1 ? Infinity : ai) - (bi === -1 ? Infinity : bi)
+  })
   return unique.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
 }
 

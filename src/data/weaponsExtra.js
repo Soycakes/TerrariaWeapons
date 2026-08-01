@@ -23,11 +23,11 @@ export const weaponExtras = {
     "progression tier": "Pre-Skeletron"
   },
   "Amarok": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-mechanical bosses"
   },
   "Amazon": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Bosses"
   },
   "Amber_Staff": {
@@ -51,7 +51,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Plantera"
   },
   "Artery": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Bosses"
   },
   "Ash_Wood_Bow": {
@@ -95,7 +95,7 @@ export const weaponExtras = {
     "progression tier": "Pre-mechanical bosses"
   },
   "Bee_Gun": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Skeletron"
   },
   "Bee_Keeper": {
@@ -158,7 +158,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Book_of_Skulls": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-Wall of Flesh"
   },
   "Boomstick": {
@@ -186,7 +186,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Bubble_Gun": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Cactus_Sword": {
@@ -202,7 +202,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Golem"
   },
   "Cascade": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Wall of Flesh"
   },
   "Celebration": {
@@ -229,7 +229,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Chik": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-mechanical bosses"
   },
   "Chlorophyte_Claymore": {
@@ -276,11 +276,11 @@ export const weaponExtras = {
     "progression tier": "Pre-mechanical bosses"
   },
   "Code_1": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Skeletron"
   },
   "Code_2": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Plantera"
   },
   "Coin_Gun": {
@@ -315,14 +315,14 @@ export const weaponExtras = {
     "progression tier": "Pre-mechanical bosses"
   },
   "Crystal_Storm": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-mechanical bosses"
   },
   "Crystal_Vile_Shard": {
     "progression tier": "Pre-mechanical bosses"
   },
   "Cursed_Flames": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-mechanical bosses"
   },
   "Cutlass": {
@@ -369,7 +369,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Demon_Scythe": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-Bosses"
   },
   "Desert_Tiger_Staff": {
@@ -489,7 +489,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Flare_Gun": {
-    subclass: "Guns",
+    subclass: "Specialist",
     "progression tier": "Pre-Bosses"
   },
   "Flintlock_Pistol": {
@@ -524,7 +524,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Format_C": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-mechanical bosses"
   },
   "Frost_Staff": {
@@ -564,7 +564,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Golden_Shower": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-mechanical bosses"
   },
   "Golem_Fist": {
@@ -572,11 +572,11 @@ export const weaponExtras = {
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Gradient": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-mechanical bosses"
   },
   "Gray_Zapinator": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Skeletron"
   },
   "Grenade_Launcher": {
@@ -607,11 +607,11 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Heat_Ray": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Hel-Fire": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-mechanical bosses"
   },
   "Hellwing_Bow": {
@@ -619,7 +619,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Wall of Flesh"
   },
   "Hive-Five": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Skeletron"
   },
   "Hornet_Staff": {
@@ -698,15 +698,15 @@ export const weaponExtras = {
     "progression tier": "Pre-Golem"
   },
   "Kraken": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Golem"
   },
   "Laser_Machinegun": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Laser_Rifle": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-mechanical bosses"
   },
   "Last_Prism": {
@@ -725,7 +725,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Leaf_Blower": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Golem"
   },
   "Leather_Whip": {
@@ -757,7 +757,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Lunar_Flare": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Endgame"
   },
   "Lunar_Portal_Staff": {
@@ -779,11 +779,11 @@ export const weaponExtras = {
     "progression tier": "Pre-Plantera"
   },
   "Magnet_Sphere": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-Golem"
   },
   "Malaise": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Bosses"
   },
   "Mandible_Blade": {
@@ -886,7 +886,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Plantera"
   },
   "Orange_Zapinator": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-mechanical bosses"
   },
   "Orichalcum_Halberd": {
@@ -1014,7 +1014,7 @@ export const weaponExtras = {
     "progression tier": "Endgame"
   },
   "Rainbow_Gun": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Golem"
   },
   "Rainbow_Rod": {
@@ -1022,7 +1022,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Plantera"
   },
   "Rally": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Bosses"
   },
   "Raven_Staff": {
@@ -1030,7 +1030,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Golem"
   },
   "Razorblade_Typhoon": {
-    subclass: "Spell tomes",
+    subclass: "Spell Tomes",
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Razorpine": {
@@ -1042,7 +1042,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Red%27s_Throw": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Plantera"
   },
   "Resonance_Scepter": {
@@ -1078,7 +1078,7 @@ export const weaponExtras = {
     "progression tier": "Endgame"
   },
   "Sandgun": {
-    subclass: "Guns",
+    subclass: "Specialist",
     "progression tier": "Pre-Bosses"
   },
   "Sanguine_Staff": {
@@ -1180,11 +1180,10 @@ export const weaponExtras = {
     "progression tier": "Pre-Golem"
   },
   "Solar_Eruption": {
-    subclass: "Flails",
     "progression tier": "Pre-Moon Lord"
   },
   "Space_Gun": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Skeletron"
   },
   "Spear": {
@@ -1228,11 +1227,11 @@ export const weaponExtras = {
   },
   "Stardust_Cell_Staff": {
     subclass: "Summons",
-    "progression tier": "Pre-Lunatic Cultist"
+    "progression tier": "Pre-Moon Lord"
   },
   "Stardust_Dragon_Staff": {
     subclass: "Summons",
-    "progression tier": "Pre-Lunatic Cultist"
+    "progression tier": "Pre-Moon Lord"
   },
   "Starfury": {
     subclass: "Swords",
@@ -1297,7 +1296,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Terrarian": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Endgame"
   },
   "The_Bee%27s_Knees": {
@@ -1305,12 +1304,12 @@ export const weaponExtras = {
     "progression tier": "Pre-Skeletron"
   },
   "The_Eye_of_Cthulhu": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Golem"
   },
   "The_Horseman%27s_Blade": {
     subclass: "Swords",
-    "progression tier": "Endgame"
+    "progression tier": "Pre-Golem"
   },
   "The_Meatball": {
     subclass: "Flails",
@@ -1321,7 +1320,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "The_Undertaker": {
-    subclass: "Specialist",
+    subclass: "Guns",
     "progression tier": "Pre-Bosses"
   },
   "Thorn_Chakram": {
@@ -1373,7 +1372,7 @@ export const weaponExtras = {
   },
   "Tragic_Umbrella": {
     subclass: "Swords",
-    "progression tier": "Endgame"
+    "progression tier": "Pre-Wall of Flesh"
   },
   "Trident": {
     subclass: "Spears",
@@ -1385,11 +1384,11 @@ export const weaponExtras = {
   },
   "True_Excalibur": {
     subclass: "Swords",
-    "progression tier": "Pre-Golem"
+    "progression tier": "Pre-Plantera"
   },
   "True_Night%27s_Edge": {
     subclass: "Swords",
-    "progression tier": "Pre-Golem"
+    "progression tier": "Pre-Plantera"
   },
   "Tsunami": {
     subclass: "Bows",
@@ -1420,15 +1419,15 @@ export const weaponExtras = {
     "progression tier": "Pre-mechanical bosses"
   },
   "Valkyrie_Yoyo": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Plantera"
   },
   "Valor": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Wall of Flesh"
   },
   "Vampire_Frog_Staff": {
-    subclass: "Sentries",
+    subclass: "Summons",
     "progression tier": "Pre-Bosses"
   },
   "Vampire_Knives": {
@@ -1467,12 +1466,12 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Wasp_Gun": {
-    subclass: "Magic guns",
+    subclass: "Magic Guns",
     "progression tier": "Pre-Golem"
   },
   "Water_Bolt": {
-    subclass: "Spell tomes",
-    "progression tier": "Pre-Bosses"
+    subclass: "Spell Tomes",
+    "progression tier": "Pre-Wall of Flesh"
   },
   "Weather_Pain": {
     subclass: "Wands",
@@ -1491,7 +1490,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Bosses"
   },
   "Wooden_Yoyo": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Bosses"
   },
   "Xeno_Staff": {
@@ -1503,7 +1502,7 @@ export const weaponExtras = {
     "progression tier": "Pre-Lunatic Cultist"
   },
   "Yelets": {
-    subclass: "Yo-yo",
+    subclass: "Yoyos",
     "progression tier": "Pre-Plantera"
   },
   "Zenith": {
@@ -1511,6 +1510,91 @@ export const weaponExtras = {
   },
   "Zombie_Arm": {
     subclass: "Swords",
+    "progression tier": "Pre-Bosses"
+  },
+  "Cobwhip": {
+    subclass: "Whips",
+    "progression tier": "Pre-Bosses"
+  },
+  "Slime_Spear": {
+    subclass: "Spears",
+    "progression tier": "Pre-Skeletron"
+  },
+  "Slime_Whip": {
+    subclass: "Whips",
+    "progression tier": "Pre-Skeletron"
+  },
+  "Soulscourge": {
+    subclass: "Whips",
+    "progression tier": "Pre-Bosses"
+  },
+  "Vasculash": {
+    subclass: "Whips",
+    "progression tier": "Pre-Bosses"
+  },
+  "Starcrash": {
+    subclass: "Whips",
+    "progression tier": "Pre-Skeletron"
+  },
+  "Vulgar_Display_of_Flower": {
+    subclass: "Whips",
+    "progression tier": "Pre-Golem"
+  },
+  "Electric_Eel": {
+    subclass: "Whips",
+    "progression tier": "Pre-Lunatic Cultist"
+  },
+  "Constellation": {
+    subclass: "Whips",
+    "progression tier": "Pre-Moon Lord"
+  },
+  "Possession": {
+    subclass: "Whips",
+    "progression tier": "Endgame"
+  },
+  "Phaseblade": {
+    subclass: "Swords",
+    "progression tier": "Pre-Skeletron"
+  },
+  "Phasesaber": {
+    subclass: "Swords",
+    "progression tier": "Pre-mechanical bosses"
+  },
+  "Flint": {
+    "progression tier": "Pre-mechanical bosses"
+  },
+  "True_Copper_Shortsword": {
+    "progression tier": "Endgame"
+  },
+  "Barrel_Launcher": {
+    subclass: "Specialist",
+    "progression tier": "Pre-mechanical bosses"
+  },
+  "Killing_Deck": {
+    "progression tier": "Pre-mechanical bosses"
+  },
+  "Axerang": {
+    subclass: "Boomerangs",
+    "progression tier": "Pre-Bosses"
+  },
+  "Cattiva": {
+    subclass: "Summons",
+    "progression tier": "Pre-Bosses"
+  },
+  "Foxsparks": {
+    subclass: "Summons",
+    "progression tier": "Pre-Bosses"
+  },
+  "Mushroom_Staff": {
+    subclass: "Summons",
+    "progression tier": "Pre-Skeletron"
+  },
+  "Barnacle_Staff": {
+    subclass: "Sentries",
+    "progression tier": "Pre-mechanical bosses"
+  },
+  "Acorn_Slingshot": {
+    subclass: "Specialist",
     "progression tier": "Pre-Bosses"
   }
 }
