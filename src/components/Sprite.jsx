@@ -15,7 +15,7 @@ export default function Sprite({ id, rawName, name, size = 32 }) {
           e.target.src = `https://terraria.wiki.gg/images/${rawName}.png`
         } else if (stage === '1') {
           e.target.dataset.stage = '2'
-          e.target.src = `${base}ui/MissingSprite.png`
+          e.target.src = `${base}ui/MissingSprite.gif`
         } else {
           e.target.onerror = null
         }

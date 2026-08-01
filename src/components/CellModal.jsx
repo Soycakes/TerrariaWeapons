@@ -36,7 +36,7 @@ export default function CellModal({ weapons, rowAxis, colAxis, row, col, onPick,
           ))}
           {valid.length === 0 && (
             <div style={{ textAlign: 'center', padding: '1rem' }}>
-              <img src={`${import.meta.env.BASE_URL}ui/MissingSprite.png`} style={{ imageRendering: 'pixelated', width: 96, height: 96, display: 'block', margin: '0 auto 0.5rem' }} />
+              <img src={`${import.meta.env.BASE_URL}ui/MissingSprite.gif`} style={{ imageRendering: 'pixelated', width: 96, height: 96, display: 'block', margin: '0 auto 0.5rem' }} />
               No weapons found.
             </div>
           )}
