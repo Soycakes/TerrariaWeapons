@@ -1,6 +1,10 @@
 import Sprite from './Sprite'
 
-export default function Grid({ rows, cols, picks, onCellClick }) {
+function display(axis, value) {
+  return axis?.rename?.[value] || value
+}
+
+export default function Grid({ rows, cols, picks, rowAxis, colAxis, onCellClick }) {
   if (!rows || !cols) {
     return <p style={{ padding: '1rem' }}>Pick a row and column category to get started.</p>
   }
@@ -12,14 +16,14 @@ export default function Grid({ rows, cols, picks, onCellClick }) {
           <tr>
             <th style={corner} />
             {cols.map(col => (
-              <th key={col} style={header}>{col}</th>
+              <th key={col} style={header}>{display(colAxis, col)}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {rows.map(row => (
             <tr key={row}>
-              <td style={header}>{row}</td>
+              <td style={header}>{display(rowAxis, row)}</td>
               {cols.map(col => {
                 const pick = picks[`${row}|${col}`]
                 return (

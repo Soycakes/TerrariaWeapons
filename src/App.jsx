@@ -12,12 +12,14 @@ const weapons = weaponData.map(w => ({
 
 const SAVE_KEY = 'tgrid'
 
-function getUniqueValues(field) {
+function getUniqueValues(axis) {
   const all = weapons.flatMap(w => {
-    const val = w.data[field]
+    const val = w.data[axis.field]
     return Array.isArray(val) ? val : [val]
   })
-  return [...new Set(all)].filter(Boolean).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+  const unique = [...new Set(all)].filter(Boolean)
+  if (axis.order) return unique.sort((a, b) => axis.order.indexOf(a) - axis.order.indexOf(b))
+  return unique.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
 }
 
 const init = (() => {
@@ -29,12 +31,16 @@ const init = (() => {
       if (weapon) picks[key] = weapon
     }
     return {
-      rowAxis: axisOptions.find(o => o.field === s.rowAxis) || null,
-      colAxis: axisOptions.find(o => o.field === s.colAxis) || null,
+      rowAxis: axisOptions.find(o => o.field === s.rowAxis) || axisOptions.find(o => o.field === 'subclass'),
+      colAxis: axisOptions.find(o => o.field === s.colAxis) || axisOptions.find(o => o.field === 'progression tier'),
       picks,
     }
   } catch {
-    return { rowAxis: null, colAxis: null, picks: {} }
+    return {
+      rowAxis: axisOptions.find(o => o.field === 'subclass'),
+      colAxis: axisOptions.find(o => o.field === 'progression tier'),
+      picks: {},
+    }
   }
 })()
 
@@ -44,8 +50,8 @@ export default function App() {
   const [picks, setPicks] = useState(init.picks)
   const [openCell, setOpenCell] = useState(null)
 
-  const rows = rowAxis ? getUniqueValues(rowAxis.field) : null
-  const cols = colAxis ? getUniqueValues(colAxis.field) : null
+  const rows = rowAxis ? getUniqueValues(rowAxis) : null
+  const cols = colAxis ? getUniqueValues(colAxis) : null
 
   useEffect(() => {
     const savedPicks = {}
@@ -107,7 +113,7 @@ export default function App() {
         <button onClick={reset} style={{ border: '1px solid #888', padding: '2px 8px', cursor: 'pointer' }}>Reset</button>
       </div>
 
-      <Grid rows={rows} cols={cols} picks={picks} onCellClick={(row, col) => setOpenCell({ row, col })} />
+      <Grid rows={rows} cols={cols} picks={picks} rowAxis={rowAxis} colAxis={colAxis} onCellClick={(row, col) => setOpenCell({ row, col })} />
 
       {openCell && (
         <CellModal
