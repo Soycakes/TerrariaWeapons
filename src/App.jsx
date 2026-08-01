@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react'
 import { weaponData } from './data/weapons'
+import { weaponExtras } from './data/weaponsExtra'
 import { axisOptions } from './config/categories'
 import Grid from './components/Grid'
 import CellModal from './components/CellModal'
 
+const weapons = weaponData.map(w => ({
+  ...w,
+  data: { ...w.data, ...(weaponExtras[w.rawName] || {}) }
+}))
+
 const SAVE_KEY = 'tgrid'
 
 function getUniqueValues(field) {
-  const all = weaponData.flatMap(w => {
+  const all = weapons.flatMap(w => {
     const val = w.data[field]
     return Array.isArray(val) ? val : [val]
   })
@@ -19,7 +25,7 @@ const init = (() => {
     const s = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')
     const picks = {}
     for (const [key, rawName] of Object.entries(s.picks || {})) {
-      const weapon = weaponData.find(w => w.rawName === rawName)
+      const weapon = weapons.find(w => w.rawName === rawName)
       if (weapon) picks[key] = weapon
     }
     return {
@@ -105,7 +111,7 @@ export default function App() {
 
       {openCell && (
         <CellModal
-          weapons={weaponData}
+          weapons={weapons}
           rowAxis={rowAxis}
           colAxis={colAxis}
           row={openCell.row}
