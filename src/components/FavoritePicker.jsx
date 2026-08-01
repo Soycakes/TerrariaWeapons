@@ -1,6 +1,12 @@
+import { useEffect } from 'react'
 import Sprite from './Sprite'
 
 export default function FavoritePicker({ title = 'Pick favorite', options, onPick, onClose }) {
+  useEffect(() => {
+    const onKey = e => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
   return (
     <div onClick={onClose} style={overlay}>
       <div onClick={e => e.stopPropagation()} style={box}>

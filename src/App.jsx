@@ -103,8 +103,8 @@ export default function App() {
   const [openFavoriteCol, setOpenFavoriteCol] = useState(null)
   const [openTotalFavorite, setOpenTotalFavorite] = useState(false)
 
-  const rows = rowAxis ? getUniqueValues(rowAxis) : null
-  const cols = colAxis ? getUniqueValues(colAxis) : null
+  const rows = useMemo(() => rowAxis ? getUniqueValues(rowAxis) : null, [rowAxis])
+  const cols = useMemo(() => colAxis ? getUniqueValues(colAxis) : null, [colAxis])
 
   const emptyCells = useMemo(() => {
     if (!rows || !cols) return new Set()
@@ -192,13 +192,16 @@ export default function App() {
 
   function reset() {
     if (!confirm('Reset all picks?')) return
-    localStorage.removeItem(SAVE_KEY)
-    setRowAxis(null)
-    setColAxis(null)
     setPicks({})
     setFavorites({})
     setColFavorites({})
     setTotalFavorite(null)
+    // keep axes but wipe all saved slots so switching axes doesnt restore old picks
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      rowAxis: rowAxis?.field || null,
+      colAxis: colAxis?.field || null,
+      slots: {},
+    }))
   }
 
   const totalPool = [...new Map(
@@ -207,7 +210,16 @@ export default function App() {
 
   return (
     <div style={{ backgroundImage: 'url(/TerrariaWeapons/ui/background.png)', backgroundSize: 'cover', backgroundAttachment: 'fixed', minHeight: '100vh', padding: '1rem', color: '#fff' }}>
-      <h1 style={{ marginBottom: '1rem', color: '#f5c842', fontSize: '3rem' }}>Favorite Terraria Weapons</h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+        <h1 style={{ color: '#f5c842', fontSize: '3rem' }}>Favorite Terraria Weapons</h1>
+        <a href="https://www.youtube.com/@soycake" target="_blank" rel="noreferrer" style={{ color: '#fff', fontSize: '0.9rem', textDecoration: 'none' }}>by Soycake</a>
+        <a href="https://www.youtube.com/@soycake" target="_blank" rel="noreferrer" title="YouTube">
+          <img src="/TerrariaWeapons/ui/youtubeLogo.png" width="32" height="32" alt="YouTube" style={{ display: 'block' }} />
+        </a>
+        <a href="https://github.com/Soycakes/TerrariaWeapons" target="_blank" rel="noreferrer" title="GitHub">
+          <img src="/TerrariaWeapons/ui/githubLogo.png" width="32" height="32" alt="GitHub" style={{ display: 'block' }} />
+        </a>
+      </div>
 
       <div style={{ display: 'inline-flex', gap: '1.5rem', alignItems: 'center', marginBottom: '1rem', background: 'rgba(30,45,64,0.75)', backdropFilter: 'blur(6px)', border: '2px solid #5080b8', borderRadius: 6, padding: '0.6rem 1rem' }}>
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

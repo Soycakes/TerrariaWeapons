@@ -11,7 +11,7 @@ export default function Grid({ rows, cols, picks, emptyCells, rowAxis, colAxis, 
 
   return (
     <div style={{ overflowX: 'auto', padding: '1rem', backdropFilter: 'blur(6px)' }}>
-      <table style={{ borderCollapse: 'collapse' }}>
+      <table style={{ borderCollapse: 'collapse', tableLayout: 'fixed', width: 'max-content' }}>
         <thead>
           <tr>
             <th style={corner} />
@@ -30,14 +30,14 @@ export default function Grid({ rows, cols, picks, emptyCells, rowAxis, colAxis, 
                 {cols.map(col => {
                   const pick = picks[`${row}|${col}`]
                   return (
-                    <td key={col} style={emptyCells.has(`${row}|${col}`) ? emptyCell : cell} onClick={() => onCellClick(row, col)}>
+                    <td key={col} className="grid-cell" style={emptyCells.has(`${row}|${col}`) ? emptyCell : cell} onClick={() => onCellClick(row, col)}>
                       <div style={cellInner}>
                         {pick && <Sprite id={pick.data.id} rawName={pick.rawName} name={pick.data.name} size={64} />}
                       </div>
                     </td>
                   )
                 })}
-                <td style={favoriteCell} onClick={() => onFavoriteClick(row)}>
+                <td className="fav-cell" style={favoriteCell} onClick={() => onFavoriteClick(row)}>
                   <div style={cellInner}>
                     {favorite && <Sprite id={favorite.data.id} rawName={favorite.rawName} name={favorite.data.name} size={64} />}
                   </div>
@@ -50,14 +50,14 @@ export default function Grid({ rows, cols, picks, emptyCells, rowAxis, colAxis, 
             {cols.map(col => {
               const fav = colFavorites[col]
               return (
-                <td key={col} style={favoriteCell} onClick={() => onColFavoriteClick(col)}>
+                <td key={col} className="fav-cell" style={favoriteCell} onClick={() => onColFavoriteClick(col)}>
                   <div style={cellInner}>
                     {fav && <Sprite id={fav.data.id} rawName={fav.rawName} name={fav.data.name} size={64} />}
                   </div>
                 </td>
               )
             })}
-            <td style={totalCell} onClick={onTotalFavoriteClick}>
+            <td className="tot-cell" style={totalCell} onClick={onTotalFavoriteClick}>
               <div style={cellInner}>
                 {totalFavorite && <Sprite id={totalFavorite.data.id} rawName={totalFavorite.rawName} name={totalFavorite.data.name} size={64} />}
               </div>
@@ -69,10 +69,10 @@ export default function Grid({ rows, cols, picks, emptyCells, rowAxis, colAxis, 
   )
 }
 
-const corner = { width: 120, height: 60 }
-const header = { width: 120, padding: '8px 12px', background: 'rgba(58,90,140,0.95)', color: '#fff', fontWeight: 'bold', border: '1px solid #5080b8', textAlign: 'center' }
-const cell = { width: 120, height: 80, border: '1px solid #3a5a8c', background: 'rgba(36,58,94,0.9)', cursor: 'pointer', verticalAlign: 'middle' }
-const emptyCell = { width: 120, height: 80, border: '1px solid #1e2d40', background: 'rgba(17,24,39,0.9)', cursor: 'pointer', verticalAlign: 'middle' }
-const favoriteCell = { width: 120, height: 80, border: '2px solid #5080b8', background: 'rgba(45,79,122,0.85)', cursor: 'pointer', verticalAlign: 'middle' }
-const totalCell = { width: 120, height: 80, border: '2px solid #4070a0', background: 'rgba(30,58,90,0.85)', cursor: 'pointer', verticalAlign: 'middle' }
+const corner = { width: 90, height: 60 }
+const header = { width: 90, padding: '8px 6px', background: 'rgba(58,90,140,0.95)', color: '#fff', fontWeight: 'bold', border: '1px solid #5080b8', textAlign: 'center' }
+const cell = { width: 90, height: 80, border: '1px solid #3a5a8c', background: 'rgba(36,58,94,0.9)', cursor: 'pointer', verticalAlign: 'middle' }
+const emptyCell = { width: 90, height: 80, border: '1px solid #1e2d40', background: 'rgba(17,24,39,0.9)', cursor: 'pointer', verticalAlign: 'middle' }
+const favoriteCell = { width: 90, height: 80, border: '2px solid #5080b8', background: 'rgba(45,79,122,0.85)', cursor: 'pointer', verticalAlign: 'middle' }
+const totalCell = { width: 90, height: 80, border: '2px solid #4070a0', background: 'rgba(30,58,90,0.85)', cursor: 'pointer', verticalAlign: 'middle' }
 const cellInner = { display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }

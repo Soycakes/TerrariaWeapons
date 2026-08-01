@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Sprite from './Sprite'
 
 function matches(weapon, field, value) {
@@ -8,6 +8,12 @@ function matches(weapon, field, value) {
 
 export default function CellModal({ weapons, rowAxis, colAxis, row, col, onPick, onClose }) {
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    const onKey = e => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
 
   const valid = weapons.filter(w =>
     matches(w, rowAxis.field, row) &&

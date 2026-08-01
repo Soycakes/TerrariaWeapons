@@ -11,3 +11,11 @@
 * {
   font-family: 'Andy', sans-serif;
 }
+
+.grid-cell, .fav-cell, .tot-cell {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.grid-cell:hover { background-color: rgba(58,90,140,0.45) !important; border-color: #f5c842 !important; }
+.fav-cell:hover { background-color: rgba(70,110,160,0.5) !important; border-color: #f5c842 !important; }
+.tot-cell:hover { background-color: rgba(50,90,130,0.5) !important; border-color: #f5c842 !important; }

@@ -1,3 +1,7 @@
+// Each axis option runs one dimension of the grid.
+// rename: display label overrides (data value -> shown label)
+// colors: header text color per value, used for rarity
+// order: overwrite alphabetical sort order
 export const axisOptions = [
   { label: 'Weapon Class', field: 'damageType', rename: {
     'Ranged': 'Ranger',
