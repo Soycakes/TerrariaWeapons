@@ -20,8 +20,8 @@ export default function FavoritePicker({ title = 'Pick favorite', options, onPic
   )
 }
 
-const overlay = { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }
-const box = { background: '#fff', padding: '1rem', borderRadius: 6, width: 280, maxHeight: '60vh', display: 'flex', flexDirection: 'column' }
+const overlay = { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }
+const box = { background: 'rgba(30,45,64,0.85)', backdropFilter: 'blur(8px)', border: '1px solid #5080b8', color: '#fff', padding: '1rem', borderRadius: 6, width: 280, maxHeight: '60vh', display: 'flex', flexDirection: 'column' }
 const list = { overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }
-const clearBtn = { background: '#fdd', border: '1px solid #c00', padding: '4px 8px', cursor: 'pointer', color: '#c00', fontWeight: 'bold', textAlign: 'left' }
-const itemBtn = { display: 'flex', alignItems: 'center', gap: 8, background: 'none', border: '1px solid #ccc', padding: '4px 8px', cursor: 'pointer', textAlign: 'left' }
+const clearBtn = { background: '#3a1a1a', border: '1px solid #c05050', padding: '4px 8px', cursor: 'pointer', color: '#ff8080', fontWeight: 'bold', textAlign: 'left' }
+const itemBtn = { display: 'flex', alignItems: 'center', gap: 8, background: '#243a5e', border: '1px solid #3a5a8c', color: '#fff', padding: '4px 8px', cursor: 'pointer', textAlign: 'left' }

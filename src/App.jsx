@@ -28,35 +28,57 @@ function getUniqueValues(axis) {
   return unique.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
 }
 
+function slotKey(rowField, colField) {
+  return `${rowField || ''}|${colField || ''}`
+}
+
+function deserializeSlot(slot) {
+  const byId = id => weapons.find(w => w.data.id === id) || null
+  const picks = {}
+  for (const [key, id] of Object.entries(slot.picks || {})) {
+    const w = byId(id)
+    if (w) picks[key] = w
+  }
+  const favorites = {}
+  for (const [row, id] of Object.entries(slot.favorites || {})) {
+    const w = byId(id)
+    if (w) favorites[row] = w
+  }
+  const colFavorites = {}
+  for (const [col, id] of Object.entries(slot.colFavorites || {})) {
+    const w = byId(id)
+    if (w) colFavorites[col] = w
+  }
+  return {
+    picks,
+    favorites,
+    colFavorites,
+    totalFavorite: byId(slot.totalFavorite),
+  }
+}
+
+function serializeSlot(picks, favorites, colFavorites, totalFavorite) {
+  const savedPicks = {}
+  for (const [k, w] of Object.entries(picks)) savedPicks[k] = w.data.id
+  const savedFavorites = {}
+  for (const [row, w] of Object.entries(favorites)) savedFavorites[row] = w.data.id
+  const savedColFavorites = {}
+  for (const [col, w] of Object.entries(colFavorites)) savedColFavorites[col] = w.data.id
+  return {
+    picks: savedPicks,
+    favorites: savedFavorites,
+    colFavorites: savedColFavorites,
+    totalFavorite: totalFavorite?.data.id || null,
+  }
+}
+
 const init = (() => {
   try {
-    const s = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')
-    const picks = {}
-    for (const [key, rawName] of Object.entries(s.picks || {})) {
-      const weapon = weapons.find(w => w.rawName === rawName)
-      if (weapon) picks[key] = weapon
-    }
-    const favorites = {}
-    for (const [row, rawName] of Object.entries(s.favorites || {})) {
-      const weapon = weapons.find(w => w.rawName === rawName)
-      if (weapon) favorites[row] = weapon
-    }
-    const colFavorites = {}
-    for (const [col, rawName] of Object.entries(s.colFavorites || {})) {
-      const weapon = weapons.find(w => w.rawName === rawName)
-      if (weapon) colFavorites[col] = weapon
-    }
-    const totalFavorite = s.totalFavorite
-      ? weapons.find(w => w.rawName === s.totalFavorite) || null
-      : null
-    return {
-      rowAxis: axisOptions.find(o => o.field === s.rowAxis) || axisOptions.find(o => o.field === 'subclass'),
-      colAxis: axisOptions.find(o => o.field === s.colAxis) || axisOptions.find(o => o.field === 'progression tier'),
-      picks,
-      favorites,
-      colFavorites,
-      totalFavorite,
-    }
+    const all = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')
+    const rowAxis = axisOptions.find(o => o.field === all.rowAxis) || axisOptions.find(o => o.field === 'subclass')
+    const colAxis = axisOptions.find(o => o.field === all.colAxis) || axisOptions.find(o => o.field === 'progression tier')
+    const slot = all.slots?.[slotKey(rowAxis?.field, colAxis?.field)] || {}
+    return { rowAxis, colAxis, ...deserializeSlot(slot) }
   } catch {
     return {
       rowAxis: axisOptions.find(o => o.field === 'subclass'),
@@ -102,28 +124,25 @@ export default function App() {
   }, [rowAxis, colAxis])
 
   useEffect(() => {
-    const savedPicks = {}
-    for (const [key, weapon] of Object.entries(picks)) savedPicks[key] = weapon.rawName
-    const savedFavorites = {}
-    for (const [row, weapon] of Object.entries(favorites)) savedFavorites[row] = weapon.rawName
-    const savedColFavorites = {}
-    for (const [col, weapon] of Object.entries(colFavorites)) savedColFavorites[col] = weapon.rawName
-    localStorage.setItem(SAVE_KEY, JSON.stringify({
-      rowAxis: rowAxis?.field || null,
-      colAxis: colAxis?.field || null,
-      picks: savedPicks,
-      favorites: savedFavorites,
-      colFavorites: savedColFavorites,
-      totalFavorite: totalFavorite?.rawName || null,
-    }))
+    const all = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')
+    all.rowAxis = rowAxis?.field || null
+    all.colAxis = colAxis?.field || null
+    all.slots = all.slots || {}
+    all.slots[slotKey(rowAxis?.field, colAxis?.field)] = serializeSlot(picks, favorites, colFavorites, totalFavorite)
+    localStorage.setItem(SAVE_KEY, JSON.stringify(all))
   }, [rowAxis, colAxis, picks, favorites, colFavorites, totalFavorite])
 
-  function pickAxis(field, setter) {
-    setter(axisOptions.find(o => o.field === field) || null)
-    setPicks({})
-    setFavorites({})
-    setColFavorites({})
-    setTotalFavorite(null)
+  function pickAxis(field, isRow) {
+    const newRowField = isRow ? (field || null) : (rowAxis?.field || null)
+    const newColField = isRow ? (colAxis?.field || null) : (field || null)
+    const all = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}')
+    const newSlot = deserializeSlot(all.slots?.[slotKey(newRowField, newColField)] || {})
+    if (isRow) setRowAxis(axisOptions.find(o => o.field === field) || null)
+    else setColAxis(axisOptions.find(o => o.field === field) || null)
+    setPicks(newSlot.picks)
+    setFavorites(newSlot.favorites)
+    setColFavorites(newSlot.colFavorites)
+    setTotalFavorite(newSlot.totalFavorite)
   }
 
   function onPick(weapon) {
@@ -173,13 +192,13 @@ export default function App() {
 
   function reset() {
     if (!confirm('Reset all picks?')) return
+    localStorage.removeItem(SAVE_KEY)
     setRowAxis(null)
     setColAxis(null)
     setPicks({})
     setFavorites({})
     setColFavorites({})
     setTotalFavorite(null)
-    localStorage.removeItem(SAVE_KEY)
   }
 
   const totalPool = [...new Map(
@@ -187,37 +206,37 @@ export default function App() {
   ).values()]
 
   return (
-    <div style={{ background: '#ccc', minHeight: '100vh', padding: '1rem' }}>
-      <h1 style={{ marginBottom: '1rem' }}>Terraria Weapons Grid</h1>
+    <div style={{ backgroundImage: 'url(/TerrariaWeapons/ui/background.png)', backgroundSize: 'cover', backgroundAttachment: 'fixed', minHeight: '100vh', padding: '1rem', color: '#fff' }}>
+      <h1 style={{ marginBottom: '1rem', color: '#f5c842', fontSize: '3rem' }}>Terraria Weapons Grid</h1>
 
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'center' }}>
-        <label>
-          Rows:&nbsp;
-          <select value={rowAxis?.field || ''} onChange={e => pickAxis(e.target.value, setRowAxis)}>
+      <div style={{ display: 'inline-flex', gap: '1.5rem', alignItems: 'center', marginBottom: '1rem', background: 'rgba(30,45,64,0.75)', backdropFilter: 'blur(6px)', border: '2px solid #5080b8', borderRadius: 6, padding: '0.6rem 1rem' }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          Rows:
+          <select value={rowAxis?.field || ''} onChange={e => pickAxis(e.target.value, true)} style={{ background: '#243a5e', color: '#fff', border: '1px solid #5080b8', padding: '2px 6px', borderRadius: 4 }}>
             <option value="">N/A</option>
             {axisOptions.map(o => <option key={o.field} value={o.field} disabled={o.field === colAxis?.field}>{o.label}</option>)}
           </select>
         </label>
 
-        <label>
-          Columns:&nbsp;
-          <select value={colAxis?.field || ''} onChange={e => pickAxis(e.target.value, setColAxis)}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          Columns:
+          <select value={colAxis?.field || ''} onChange={e => pickAxis(e.target.value, false)} style={{ background: '#243a5e', color: '#fff', border: '1px solid #5080b8', padding: '2px 6px', borderRadius: 4 }}>
             <option value="">N/A</option>
             {axisOptions.map(o => <option key={o.field} value={o.field} disabled={o.field === rowAxis?.field}>{o.label}</option>)}
           </select>
         </label>
 
-        <button onClick={reset} style={{ border: '1px solid #888', padding: '2px 8px', cursor: 'pointer' }}>Reset</button>
+        <button onClick={reset} style={{ border: '1px solid #5080b8', background: '#243a5e', color: '#fff', padding: '2px 12px', cursor: 'pointer', borderRadius: 4 }}>Reset</button>
       </div>
 
       <Grid
         rows={rows}
         cols={cols}
         picks={picks}
+        emptyCells={emptyCells}
         rowAxis={rowAxis}
         colAxis={colAxis}
         favorites={favorites}
-        emptyCells={emptyCells}
         colFavorites={colFavorites}
         totalFavorite={totalFavorite}
         onCellClick={(row, col) => setOpenCell({ row, col })}

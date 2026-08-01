@@ -682,7 +682,7 @@ export const weaponExtras = {
     "progression tier": "Pre-mechanical bosses"
   },
   "KO_Cannon": {
-    subclass: "Launchers",
+    subclass: "Flails",
     "progression tier": "Pre-mechanical bosses"
   },
   "Kaleidoscope": {

@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Andy';
+  src: url('/TerrariaWeapons/fonts/Andy Std Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+* {
+  font-family: 'Andy', sans-serif;
+}
